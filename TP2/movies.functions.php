@@ -11,7 +11,7 @@
 
 	function printSearchParameters ($inputs) {
 		// renvoie la liste des paramètres de recherche en tant que string
-		if (empty($input))
+		if (count($inputs) <= 0)
 			return "aucun paramètre entré, voici la liste complète";
 		
 		$out = "";
@@ -70,7 +70,7 @@
 		return false;
 	}
 
-	function  render_movie_list($movies) {
+	function  renderMovieList($movies) {
 		//retourne une chaîne de caractère correspondant à l'affichage de la liste de films
 		if (empty($movies))
 			return "aucun film ne correspond aux critères de recherche.";

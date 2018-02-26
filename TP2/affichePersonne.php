@@ -7,8 +7,8 @@
 
 <body>
 
-	<?php 
-		require_once("personne.class.php");
+	<?php
+		require_once("Personne.class.php");
 		$out = "<p>";
 
 		$fields = ["prenom","nom","age","ville"];

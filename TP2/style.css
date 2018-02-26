@@ -42,8 +42,12 @@ ul {
 	flex-wrap: wrap;
 }
 
+ul.movie-list {
+	list-style-type: none;
+}
+
 .movie {
 	width: 200px;
-	height: 100px;
-	margin: 20px;
+	height: 100px; 
+	margin: 20px ;
 }

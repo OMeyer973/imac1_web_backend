@@ -33,7 +33,7 @@
 		}
 
 		//on affiche la liste des films sélectionner
-		$out .= render_movie_list($selectedMovies);
+		$out .= renderMovieList($selectedMovies);
 
 		echo $out;
 	?>
