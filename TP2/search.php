@@ -3,27 +3,44 @@
 <html>
 <head>
 	<meta content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-	<h1> recherche d'un film dans la liste</h1>
-	<form method="GET" action="movies.php"> 
+	<h1 class="title"> recherche d'un film dans la liste</h1>
+	<form class="search-form" method="GET" action="movies.php"> 
 		<ul>
-			<li><input type="string" name="title" value=""> titre du film </li>
+			<li>
+				<div class="field-title"> titre du film </div>
+				<div class="field"><input type="string" name="title" value=""></div>
+			</li>
 			<!--génération des genres -->
-			<?php
-			require_once("data.movies.php");
-			sort($genres);
-			$out = "";
-			foreach ($genres as $key => $value)
-				$out .= "<li><input type=\"checkbox\" name=\"genre[]\" value=\"$value\"> $value </li>";
-			echo $out;
-			?>
-			
-			<li><input type="date" name="dateFrom" value="" /> sorti avant </li>
-			<li><input type="date" name="dateTo" value="" /> et après </li>
-			<li><input type="string" name="director" value=""> réalisateur </li>
-			<input value="chercher le film" type="submit">
+			<li>
+				<div class="field-title"> genre(s) </div>
+				<div class="field">
+					<?php
+					require_once("data.movies.php");
+					sort($genres);
+					$out = "";
+					foreach ($genres as $key => $value)
+						$out .= "<input type=\"checkbox\" name=\"genre[]\" value=\"$value\"> $value <br>";
+					echo $out;
+					?>
+				</div>
+			</li>
+			<li>
+				<div class="field-title"> sorti avant </div>
+				<div class="field"><input type="date" name="dateFrom" value="" /></div>
+			</li>
+			<li>
+				<div class="field-title"> et après </div>
+				<div class="field"><input type="date" name="dateTo" value="" /></div>
+			</li>
+			<li>
+				<div class="field-title"> réalisateur </div>
+				<div class="field"><input type="string" name="director" value=""></div>
+			</li>
+			<input class="submit" value="chercher le film" type="submit">
 		</ul>
 	</form>
 

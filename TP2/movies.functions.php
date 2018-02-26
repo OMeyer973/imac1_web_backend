@@ -11,6 +11,9 @@
 
 	function printSearchParameters ($inputs) {
 		// renvoie la liste des paramètres de recherche en tant que string
+		if (empty($input))
+			return "aucun paramètre entré, voici la liste complète";
+		
 		$out = "";
 		foreach ($inputs as $key => $value) {
 			$out .= $key . " : ";
@@ -52,8 +55,9 @@
 				if (!isInList($movie[$field], $value))
 					return false;
 			} else
-
-			if ($movie[$field] == $value)
+			//(strpos($a, $b) => est ce que b est substr de a ?
+			//strtoupper($a) => retourne $a en uppercase
+			if (strpos(strtoupper($movie[$field]), strtoupper($value)) === false)
 				return false;
 		}
 		return true;
@@ -68,6 +72,9 @@
 
 	function  render_movie_list($movies) {
 		//retourne une chaîne de caractère correspondant à l'affichage de la liste de films
+		if (empty($movies))
+			return "aucun film ne correspond aux critères de recherche.";
+
 		$out = "<ul class=\"movie-list\">";
 		foreach ($movies as $key => $film) {
 			$out .= "<li><ul class=\"movie\">";

@@ -1,0 +1,49 @@
+body {
+	margin: 0px 15px 0px 15px;
+}
+
+.title {
+	text-align: center;
+}
+
+.search-form,
+.search-header {
+	max-width: 350px;
+	margin: auto;
+}
+
+ul {
+	padding: 0px;
+}
+.search-form li {
+	display: flex;
+	flex-direction: row;}
+
+.field-title,
+.field {
+	width: 170px;
+	margin: 0px 5px 0px 5px;
+}
+
+.field-title {
+	text-align: right;
+}
+
+.submit {
+	display: block;
+	margin: 10px auto 10px auto;
+}
+
+.movie-list {
+	justify-content: center;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.movie {
+	width: 200px;
+	height: 100px;
+	margin: 20px;
+}
