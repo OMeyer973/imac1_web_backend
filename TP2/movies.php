@@ -23,13 +23,11 @@
 
 		//affichage des champs
 		$out .= "<h3> paramètres de la recherche :</h3>";
-		foreach ($inputs as $key => $value) {
-			$out .= $key . " : " . $value . "<br>";
-		}
+		$out .= printSearchParameters($inputs);
 
 		//on ajoute le film à la liste des films à afficher
 		foreach ($movies as $movie) {
-			if (movieMatchesRange($movie, $inputs)) {
+			if (movieMatches($movie, $inputs)) {
 				array_push($selectedMovies, $movie);
 			}
 		}
@@ -46,38 +44,68 @@
 		function getSearchFields($fields) {
 			//récupération des champs du formulaire de recherche
 			$inputs = [];
-			foreach ($fields as $field) {
-				if (isset( $_GET[$field]) && !empty( $_GET[$field])) {
+			foreach ($fields as $field)
+				if (isset( $_GET[$field]) && !empty( $_GET[$field]))
 					$inputs[$field] = $_GET[$field];
-				}
-			}
+
 			return $inputs;
 		}
 
+		function printSearchParameters ($inputs) {
+			// renvoie la liste des paramètres de recherche en tant que string
+			$out = "";
+			foreach ($inputs as $key => $value) {
+				$out .= $key . " : ";
+
+				if ($key == "genre")
+					foreach ($value as $genre) 
+						$out .= $genre . " ";
+				else 
+					$out .= $value;
+				
+				$out .= "<br>";
+			}
+			return $out;
+		}
+
+		/*
 		function movieMatches($movie, $criterias) {
-			//est ce que le film correspond exactement à la liste des critères ?
+			//est ce que le film correspond exactement à la liste des critères ? -> implantation pour des champs simples : pas d'intervalle ou de liste de checkbox
 			foreach ($criterias as $field => $value) {
 				if ($movie[$field] != $value)
 					return false;
 			}
 			return true;
 		}
+		*/
 
-		function movieMatchesRange($movie, $criterias) {
-			//est ce que le film correspond à la liste des critères (avec un intervalle de dates) ?
+		function movieMatches($movie, $criterias) {
+			//est ce que le film correspond à la liste des critères ?
 			foreach ($criterias as $field => $value) {
 				if ($field == "dateFrom") {
 					if (strtotime($movie["releaseDate"]) < strtotime($value))	
 						return false;
-				} else
+				} else 
 				if ($field == "dateTo") {
 					if (strtotime($movie["releaseDate"]) > strtotime($value))	
 						return false;
-				} else 
-				if ($movie[$field] != $value)
+				} else
+				if ($field == "genre") {
+					if (!isInList($movie[$field], $value))
+						return false;
+				} else
+				
+				if (strpos($movie[$field], $value) != false)
 					return false;
 			}
 			return true;
+		}
+
+		function isInList($objToFind, $list) {
+			foreach ($list as $value)
+				if ($objToFind == $value) 
+					return true;
+			return false;
 		}
 
 		function  render_movie_list($movies) {
@@ -102,9 +130,8 @@
 					else
 						$out .= "<li> $key : $value </li>";
 				}
-			} else {
+			} else
 				$out .= "<li> film is empty </li>";
-			}
 			return $out;
 		}
 	?>
