@@ -94,8 +94,9 @@
 					if (!isInList($movie[$field], $value))
 						return false;
 				} else
-				
-				if (strpos($movie[$field], $value) != false)
+				//(strpos($a, $b) => est ce que b est substr de a ?
+				//strtoupper($a) => retourne $a en uppercase
+				if (strpos(strtoupper($movie[$field]), strtoupper($value)) === false)
 					return false;
 			}
 			return true;
