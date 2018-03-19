@@ -1,9 +1,5 @@
 <?php
-<<<<<<< HEAD
 require_once 'MyPDO.imac-movies.include.php';
-=======
-require_once 'MyPDO.my_db.include.php'; //TO DO : à modifier
->>>>>>> a32a954be29adfd5ac7eb8ed96fe14db0b75a28f
 
 /**
  * Classe Movie
@@ -33,7 +29,6 @@ class Movie {
 	 * @throws Exception s'il n'existe pas cet $id dans a bdd
 	 */
 	public static function createFromId($id){
-<<<<<<< HEAD
 		$stmt = MyPDO::getInstance()->prepare("SELECT * FROM movie WHERE id = :id");
 		$stmt->execute(array(":id"=>$id));
 		$stmt->setFetchMode(PDO::FETCH_CLASS, "movie");
@@ -41,9 +36,6 @@ class Movie {
 			return $object;
 		else
 			throw new Exception("unable to fetch movie from id");
-=======
-		// TO DO
->>>>>>> a32a954be29adfd5ac7eb8ed96fe14db0b75a28f
 	}
 
 	/********************GETTERS SIMPLES********************/
@@ -53,11 +45,7 @@ class Movie {
 	 * @return int $id
 	 */
 	public function getId() {
-<<<<<<< HEAD
 		return $this->id;
-=======
-		// TO DO
->>>>>>> a32a954be29adfd5ac7eb8ed96fe14db0b75a28f
 	}
 
 	/**
@@ -65,11 +53,7 @@ class Movie {
 	 * @return string $title
 	 */
 	public function getTitle() {
-<<<<<<< HEAD
 		return $this->title;
-=======
-		// TO DO
->>>>>>> a32a954be29adfd5ac7eb8ed96fe14db0b75a28f
 	}
 
 	/**
@@ -77,11 +61,7 @@ class Movie {
 	 * @return string $releaseDate
 	 */
 	public function getReleaseDate() {
-<<<<<<< HEAD
 		return $this->releaseDate;
-=======
-		// TO DO
->>>>>>> a32a954be29adfd5ac7eb8ed96fe14db0b75a28f
 	}
 
 	/**
@@ -89,11 +69,7 @@ class Movie {
 	 * @return string $idCountry
 	 */
 	public function getIdCountry() {
-<<<<<<< HEAD
 		return $this->idCountry;
-=======
-		// TO DO
->>>>>>> a32a954be29adfd5ac7eb8ed96fe14db0b75a28f
 	}
 
 	/*******************GETTERS COMPLEXES*******************/
@@ -105,14 +81,10 @@ class Movie {
 	 * @return array<Movie> liste d'instances de Movie
 	 */
 	public static function getAll() {
-<<<<<<< HEAD
 		$stmt = MyPDO::getInstance()->prepare("SELECT * FROM movie ORDER BY title");
 		$stmt->execute();
 		$stmt->setFetchMode(PDO::FETCH_CLASS, "movie");
 		return $stmt->fetchAll();
-=======
-		// TO DO
->>>>>>> a32a954be29adfd5ac7eb8ed96fe14db0b75a28f
 	}
 
 	/**
@@ -123,7 +95,6 @@ class Movie {
 	 * @return array<Movie> liste d'instances de Movie
 	 */
 	public static function getFromDirectorId($idDirector){
-<<<<<<< HEAD
 			$stmt = MyPDO::getInstance()->prepare("
 			SELECT 
 				movie.id,
@@ -144,9 +115,6 @@ class Movie {
 			return $object;
 		else
 			throw new Exception("unable to fetch movies from director id");
-=======
-		//TO DO next : #04 Jointure Cast - Movie
->>>>>>> a32a954be29adfd5ac7eb8ed96fe14db0b75a28f
 	}
 
 	/**
@@ -157,7 +125,6 @@ class Movie {
 	 * @return array<Movie> liste d'instances de Movie
 	 */
 	public static function getFromActorId($idActor){
-<<<<<<< HEAD
 			$stmt = MyPDO::getInstance()->prepare("
 			SELECT 
 				movie.id,
@@ -178,9 +145,6 @@ class Movie {
 			return $object;
 		else
 			throw new Exception("unable to fetch movies from actor id");
-=======
-		// TO DO next : #04 Jointure Cast - Movie
->>>>>>> a32a954be29adfd5ac7eb8ed96fe14db0b75a28f
 	}
 
 	/**
