@@ -2,15 +2,18 @@
 
 	function  renderPeopleList($people) {
 		//retourne une chaîne de caractère correspondant à l'affichage de la liste de gens
-		if (empty($people))
-			return "Aucune personne n'est présente dans la liste.";
 
 		$out = "<ul class=\"people-list\">";
-		foreach ($people as $key => $person) {
-			$out .= "<li class=\"person\">";
-			$out .= renderPersonLink($person);
-			$out .= "</li>";
-		}
+		
+			if (empty($people))
+				$out .= "Aucune personne.";
+
+			else foreach ($people as $key => $person) {
+				$out .= "<li><ul class=\"person\">";
+				$out .= renderPersonLink($person);
+				$out .= "</ul></li>";
+			}
+
 		$out .= "</ul>";
 		return $out;
 	}
@@ -27,13 +30,13 @@
 			$out .= "</h3>";
 
 			if (isset( $person->role) && !empty( $person->role)) {
-				$out .= "</li>";
+				$out .= "<h4>";
 					$out .= "dans le rôle de " .$person->role;
-				$out .= "</li>";
+				$out .= "<h4>";
 			}
 	
 		} else
-			$out .= "<li> pas d'info sur la personne à cet id </li>";
+			$out .= "<p> pas d'info sur la personne à cet id </p>";
 		return $out;
 	}
 
@@ -42,14 +45,19 @@
 		$out = "";
 		if ($person != NULL) {
 			//infos sur la personne
+
+			$out .= "<ul class=\"people-list\">";
+			$out .= "<li><ul class=\"person\">";
 			$out .= "<h3>" .$person->getLastname() ." " .$person->getFirstname() ."</h3>\n";
-			$out .= "<li>né(e) en " .$person->getBirthYear() ."</li>\n";
-			if (!$person->isAlive()) 
-				$out .= "<li>mort en " .$person->getDeathYear() ."</li>\n";
-			else
-				$out .= "<li>vivant(e)</div>\n";
+				$out .= "<li>né(e) en " .$person->getBirthYear() ."</li>\n";
+				if (!$person->isAlive()) 
+					$out .= "<li>mort en " .$person->getDeathYear() ."</li>\n";
+				else
+					$out .= "<li>vivant(e)</div>\n";
+			$out .= "</ul>";
+			$out .= "</li></ul>";	
 		} else
-			$out .= "<li> pas d'info sur la personne à cet id </li>";
+			$out .= "<p> pas d'info sur la personne à cet id </p>";
 		return $out;
 	}
 

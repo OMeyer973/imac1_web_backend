@@ -8,7 +8,6 @@
 
 <body>
 	<h1 class="title">Infos sur un film </h1>
-	<ul class="people-list"><li><ul class="people">
 		<?php
 
 			require_once 'MyPDO.imac-movies.include.php';
@@ -38,5 +37,4 @@
 			echo $out;
 
 		?>
-	</ul></li></ul>
 </body>

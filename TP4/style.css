@@ -1,5 +1,6 @@
+
 body {
-	margin: 0px 15px 0px 15px;
+	margin: 0px 5% 5% 5%;
 }
 
 .title {
@@ -12,9 +13,14 @@ body {
 	margin: auto;
 }
 
+h3 {
+	margin: 5px 0px;
+}
+
 ul {
 	padding: 0px;
 }
+
 .search-form li {
 	display: flex;
 	flex-direction: row;}
@@ -36,7 +42,6 @@ ul {
 
 .movie-list, .people-list {
 	justify-content: center;
-	width: 100%;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -47,6 +52,6 @@ ul.movie-list, ul.people-list {
 }
 
 .movie, .person {
-	width: 200px;
-	margin: 0px 20px;
+	width: 300px;
+	margin: 10px 10px;
 }
