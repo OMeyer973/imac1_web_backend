@@ -25,6 +25,13 @@
 					$out .= $person->getLastname() ." " .$person->getFirstname();
 				$out .= "</a>";
 			$out .= "</h3>";
+
+			if (isset( $person->role) && !empty( $person->role)) {
+				$out .= "</li>";
+					$out .= "dans le rôle de " .$person->role;
+				$out .= "</li>";
+			}
+	
 		} else
 			$out .= "<li> pas d'info sur la personne à cet id </li>";
 		return $out;
