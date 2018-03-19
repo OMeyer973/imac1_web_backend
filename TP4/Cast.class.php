@@ -1,5 +1,9 @@
 <?php
+<<<<<<< HEAD
 require_once 'MyPDO.imac-movies.include.php'; // TO DO : à modifier
+=======
+require_once 'MyPDO.my_db.include.php'; // TO DO : à modifier
+>>>>>>> a32a954be29adfd5ac7eb8ed96fe14db0b75a28f
 
 /**
  * Classe Cast
@@ -30,6 +34,7 @@ class Cast {
 	 * @return Cast instance correspondant à $id
 	 * @throws Exception s'il n'existe pas cet $id dans a bdd
 	 */
+<<<<<<< HEAD
 
 	public static function createFromId($id){
 		$stmt = MyPDO::getInstance()->prepare("SELECT * FROM cast WHERE id = :id");
@@ -39,6 +44,17 @@ class Cast {
 			return $object;
 		else
 			throw new Exception("unable to fetch cast from id");
+=======
+	public static function createFromId($id){
+		// TO DO
+		// $stmt = MyPDO::getInstance()->prepare(...);
+		// $stmt->execute(...);
+		// $stmt->setFetchMode(...);
+		// if (($object = $stmt->fetch()) !== false)
+		//	...
+		// else
+		//	throw new Exception(...);
+>>>>>>> a32a954be29adfd5ac7eb8ed96fe14db0b75a28f
 	}
 
 	/********************GETTERS SIMPLES********************/
@@ -48,7 +64,11 @@ class Cast {
 	 * @return int $id
 	 */
 	public function getId() {
+<<<<<<< HEAD
 		return $this->id;
+=======
+		// TO DO
+>>>>>>> a32a954be29adfd5ac7eb8ed96fe14db0b75a28f
 	}
 
 	/**
@@ -56,7 +76,11 @@ class Cast {
 	 * @return string $firstname
 	 */
 	public function getFirstname() {
+<<<<<<< HEAD
 		return $this->firstname;
+=======
+		// TO DO
+>>>>>>> a32a954be29adfd5ac7eb8ed96fe14db0b75a28f
 	}
 
 	/**
@@ -64,7 +88,11 @@ class Cast {
 	 * @return string $lastname
 	 */
 	public function getLastname() {
+<<<<<<< HEAD
 		return $this->lastname;
+=======
+		// TO DO
+>>>>>>> a32a954be29adfd5ac7eb8ed96fe14db0b75a28f
 	}
 
 	/**
@@ -72,7 +100,11 @@ class Cast {
 	 * @return int $birthYear
 	 */
 	public function getBirthYear() {
+<<<<<<< HEAD
 		return $this->birthYear;
+=======
+		// TO DO
+>>>>>>> a32a954be29adfd5ac7eb8ed96fe14db0b75a28f
 	}
 
 	/**
@@ -80,7 +112,11 @@ class Cast {
 	 * @return int $deathYear (null si vivant)
 	 */
 	public function getDeathYear() {
+<<<<<<< HEAD
 		return $this->deathYear;
+=======
+		// TO DO
+>>>>>>> a32a954be29adfd5ac7eb8ed96fe14db0b75a28f
 	}
 	
 	/**
@@ -88,7 +124,11 @@ class Cast {
 	 * @return bool
 	 */
 	public function isAlive() {
+<<<<<<< HEAD
 		return ($this->deathYear == null);
+=======
+		// TO DO
+>>>>>>> a32a954be29adfd5ac7eb8ed96fe14db0b75a28f
 	}
 
 	/*******************GETTERS COMPLEXES*******************/
@@ -99,10 +139,14 @@ class Cast {
 	 * @return array<Cast> liste d'instances de Cast
 	 */
 	public static function getAll() {
+<<<<<<< HEAD
 		$stmt = MyPDO::getInstance()->prepare("SELECT * FROM cast ORDER BY lastname, firstname");
 		$stmt->execute();
 		$stmt->setFetchMode(PDO::FETCH_CLASS, "cast");
 		return $stmt->fetchAll();
+=======
+		// TO DO
+>>>>>>> a32a954be29adfd5ac7eb8ed96fe14db0b75a28f
 	}
 
 	/**
@@ -112,6 +156,7 @@ class Cast {
 	 * @return array<Cast> liste des instances de Cast
 	 */
 	public static function getDirectorsFromMovieId($idMovie) {
+<<<<<<< HEAD
 		$stmt = MyPDO::getInstance()->prepare("
 			SELECT 
 				cast.id,
@@ -132,6 +177,9 @@ class Cast {
 			return $object;
 		else
 			throw new Exception("unable to fetch directors from movie id");
+=======
+		// TO DO next : #04 Jointure Cast - Movie
+>>>>>>> a32a954be29adfd5ac7eb8ed96fe14db0b75a28f
 	}
 
 	/**
@@ -141,6 +189,7 @@ class Cast {
 	 * @return array<Cast> liste d'instances de Cast
 	 */
 	public static function getActorsFromMovieId($idMovie) {
+<<<<<<< HEAD
 			$stmt = MyPDO::getInstance()->prepare("
 			SELECT 
 				cast.id, 
@@ -162,6 +211,9 @@ class Cast {
 			return $object;
 		else
 			throw new Exception("unable to fetch actors from movie id");
+=======
+		// TO DO next : #04 Jointure Cast - Movie
+>>>>>>> a32a954be29adfd5ac7eb8ed96fe14db0b75a28f
 	}
 
 }
