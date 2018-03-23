@@ -14,6 +14,7 @@
 			require_once '../PDO/MyPDO.imac-movies.include.php';
 			require_once '../classes/Movie.class.php';
 			require_once '../functions/Movie.functions.php';
+			require_once '../functions/Movies.functions.php';
 			require_once '../classes/Cast.class.php';
 			require_once '../functions/Cast.functions.php';
 			
@@ -25,7 +26,7 @@
 
 			//réception des champs
 			$inputs = getSearchFields($fields);
-			
+
 			//affichage des champs
 			$out .= "<div class=\"search-header\"><h2> paramètres de la recherche :</h2>";
 			$out .= printSearchParameters($inputs);
