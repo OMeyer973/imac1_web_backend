@@ -23,7 +23,7 @@
 
 				$person = Cast::createFromId($id);
 				$out .= renderPerson ($person);
-				$out .= printBackToSearch();
+				$out .= renderBackToSearch();
 
 				$out .= "<h2> A réalisé </h2>";
 				$moviesDirected = Movie::getFromDirectorId($person->getId());

@@ -1,5 +1,5 @@
 <?php
-	function printBackToSearch() {
+	function renderBackToSearch() {
 		//renvoie la chaine de caractères correspondant au bouton de retour à la page de recherche de film.
 		$out = "<form class=\"search-parameters\" method=\"GET\" action=\"Search.php\">";
 		$out .= "<input class=\"submit\" value=\"retour à la recherche\" type=\"submit\">";
@@ -18,7 +18,7 @@
 				$out .= "</a>";
 			$out .= "</h3>";
 		} else
-			$out .= "<p>pas d'info sur le film à cet id</p>";
+			$out .= "<p>Pas d'info sur le film à cet id.</p>";
 		return $out;
 	}
 
@@ -30,9 +30,9 @@
 			$out = "<ul class=\"movie-list\">";
 			$out .= "<li><ul class=\"movie\">";
 			$out .= "<h3>" .$movie->getTitle() ."</h3>\n";
-			$out .= "<li>sorti le " .$movie->getReleaseDate() ."</li>\n";
-			$out .= "<li>id du pays : " .$movie->getIdCountry() ."</li>\n";
-			$out .= "<li>genre(s) : ";
+			$out .= "<li>Sorti le " .$movie->getReleaseDate() ."</li>\n";
+			$out .= "<li>Pays : " .Country::createFromCode($movie->getIdCountry())->getName() ."</li>\n";
+			$out .= "<li>Genre(s) : ";
 				$genres = $movie->getGenres();
 				$i =0;
 				foreach ($genres as $genre) {
@@ -40,7 +40,7 @@
 						$out .= ", ";	
 					}
 					$i ++;
-					$out .= $genre["name"];
+					$out .= $genre->getName();
 				}
 			$out .= "</li>\n";
 			$out .= "</ul></li>";
@@ -49,7 +49,7 @@
 		return $out;
 	}
 
-	
+
 	function  renderMovieList($movies) {
 		//retourne une chaîne de caractère correspondant à l'affichage de la liste de films
 		

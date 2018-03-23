@@ -1,5 +1,4 @@
 <?php
-	include_once '../classes/Cast.class.php';
  
 	function getSearchFields($fields) {
 		//récupération des champs du formulaire de recherche
@@ -110,14 +109,15 @@
 			return false;
 
 		foreach ($list as $personListed) {
-			$personListedFNLN = strtoupper($personListed->getFirstname()) ." " .strtoupper($personListed->getLastname()); //concaténation firstname lastname
-			
-			$personListedLNFN = strtoupper($personListed->getLastname()) ." " .strtoupper($personListed->getFirstname()); // 
-			//concaténation lastnameFirstname
+			$personListedFN = strtoupper($personListed->getFirstname());
+			$personListedLN = strtoupper($personListed->getLastname());
+			$personListedFNLN = $personListedFN ." " .$personListedLN; //concaténation firstname lastname
+			$personListedLNFN = $personListedLN ." " .$personListedFN; //concaténation lastnameFirstname
+
 			if (!(strpos($personListedFNLN, $person) === false && //le critère de recherche est dans le FNLN ?
 				strpos($personListedLNFN, $person) === false && //le critère de recherche est dans le LNFN ?
-				strpos($person, $personListedFNLN) === false && //le FNLN est dans le critère de recherche ?
-				strpos($person, $personListedLNFN) === false)) { //le LNFN est dans le critère de recherche ?
+				strpos($person, $personListedFN) === false && //le FN est dans le critère de recherche ?
+				strpos($person, $personListedLN) === false)) { //le LN est dans le critère de recherche ?
 				return true;
 			}
 		}

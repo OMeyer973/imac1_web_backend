@@ -1,5 +1,14 @@
 
-body, input {
+html {
+	height: 100%;
+}
+
+body {
+	background-image: url("img/bg.jpg"); 
+    background-position: center; 
+    background-size: cover;
+}
+body, input { 
 	background-color: #212426;
 	color: #A7A7A7;
 	margin: 0px 5% 5% 5%;
@@ -22,6 +31,10 @@ a:hover, a:visited:hover {
 	color: #AAAAAA;
 }
 
+.xdebug-error, .xe-notice{
+	color:black;
+}
+
 .title {
 	text-align: center;
 }
@@ -41,10 +54,10 @@ ul {
 
 .search-parameters li {
 	display: flex;
-	flex-direction: row;}
+	flex-direction: row;
+}
 
-.field-title,
-.field {
+.field-title, .field {
 	width: 170px;
 	margin: 0px 5px 0px 5px;
 }
