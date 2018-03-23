@@ -3,12 +3,12 @@
 <html>
 <head>
 	<meta content="text/html; charset=utf-8" />
-	<link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" href="../style.css" />
 </head>
 
 <body>
 	<h1 class="title"> recherche d'un film dans la liste</h1>
-	<form class="search-form" method="GET" action="movies.php"> 
+	<form class="search-form" method="GET" action="Movies.php"> 
 		<ul>
 			<li>
 				<div class="field-title"> titre du film </div>
@@ -19,12 +19,10 @@
 				<div class="field-title"> genre(s) </div>
 				<div class="field">
 					<?php
-					require_once("data.movies.php");
-					sort($genres);
-					$out = "";
-					foreach ($genres as $key => $value)
-						$out .= "<input type=\"checkbox\" name=\"genre[]\" value=\"$value\"> $value <br>";
-					echo $out;
+						require_once '../functions/Search.functions.php';
+						require_once '../classes/Genre.class.php';
+						$genres = Genre::getAll();
+						echo renderGenresCheckboxes($genres);
 					?>
 				</div>
 			</li>

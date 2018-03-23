@@ -1,5 +1,5 @@
 <?php
-require_once 'MyPDO.my_db.include.php'; //TO DO : à modifier
+require_once '../PDO/MyPDO.imac-movies.include.php';
 
 /**
  * Classe Genre
@@ -26,7 +26,13 @@ class Genre {
 	 * @throws Exception s'il n'existe pas cet $id dans a bdd
 	 */
 	public static function createFromId($id){
-		// TO DO
+		$stmt = MyPDO::getInstance()->prepare("SELECT * FROM genre WHERE id = :id");
+		$stmt->execute(array(":id"=>$id));
+		$stmt->setFetchMode(PDO::FETCH_CLASS, "genre");
+		if (($object = $stmt->fetch()) !== false)
+			return $object;
+		else
+			throw new Exception("unable to fetch genre from id");
 	}
 
 	/********************GETTERS SIMPLES********************/
@@ -36,7 +42,7 @@ class Genre {
 	 * @return int $id
 	 */
 	public function getId() {
-		// TO DO
+		return $this->id;
 	}
 
 	/**
@@ -44,7 +50,7 @@ class Genre {
 	 * @return string $name
 	 */
 	public function getName() {
-		// TO DO
+		return $this->name;
 	}
 
 	/*******************GETTERS COMPLEXES*******************/
@@ -56,6 +62,20 @@ class Genre {
 	 * @return array<Genre> liste d'instances de Genre
 	 */
 	public static function getAll() {
-		// TO DO
+		$stmt = MyPDO::getInstance()->prepare("
+			SELECT
+				`genre`.`id`,
+				`genre`.`name`,
+				COUNT(*) as \"nbmovies\"
+			FROM `genre`, `movie`, `moviegenre` 
+			WHERE
+				`genre`.`id` = `moviegenre`.`idGenre` AND
+				`movie`.`id` = `moviegenre`.`idMovie`
+			GROUP BY `genre`.`name`
+			HAVING nbmovies > 0
+		");
+		$stmt->execute();
+		$stmt->setFetchMode(PDO::FETCH_CLASS, "genre");
+		return $stmt->fetchAll();
 	}
 }

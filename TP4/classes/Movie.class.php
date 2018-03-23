@@ -1,5 +1,5 @@
 <?php
-require_once 'MyPDO.imac-movies.include.php';
+require_once '../PDO/MyPDO.imac-movies.include.php';
 
 /**
  * Classe Movie
@@ -26,11 +26,11 @@ class Movie {
 	 * Usine pour fabriquer une instance de Movie à partir d'un id (via la bdd)
 	 * @param int $id identifiant du film à créer (bdd)
 	 * @return Movie instance correspondant à $id
-	 * @throws Exception s'il n'existe pas cet $id dans a bdd
+	 * @throws Exception s'il n'existe pas cet $id dans la bdd
 	 */
 	public static function createFromId($id){
 		$stmt = MyPDO::getInstance()->prepare("SELECT * FROM movie WHERE id = :id");
-		$stmt->execute(array(":id"=>$id));
+		$stmt->execute(array(":id" => $id));
 		$stmt->setFetchMode(PDO::FETCH_CLASS, "movie");
 		if (($object = $stmt->fetch()) !== false)
 			return $object;
@@ -81,7 +81,7 @@ class Movie {
 	 * @return array<Movie> liste d'instances de Movie
 	 */
 	public static function getAll() {
-		$stmt = MyPDO::getInstance()->prepare("SELECT * FROM movie ORDER BY title");
+		$stmt = MyPDO::getInstance()->prepare("SELECT * FROM movie ORDER BY releaseDate DESC, title ASC");
 		$stmt->execute();
 		$stmt->setFetchMode(PDO::FETCH_CLASS, "movie");
 		return $stmt->fetchAll();
@@ -138,7 +138,6 @@ class Movie {
 				actor.idActor = :idActor AND
 				cast.id = :idActor
 		");
-			
 		$stmt->execute(array(":idActor"=>$idActor));
 		$stmt->setFetchMode(PDO::FETCH_CLASS, "movie");
 		if (($object = $stmt->fetchAll()) !== false)
@@ -153,6 +152,21 @@ class Movie {
 	 * @return array<Genre> liste d'instances de Genre
 	 */
 	public function getGenres() {
-		// TO DO next : #05 Classe Genre
+			$stmt = MyPDO::getInstance()->prepare("
+			SELECT 
+				`genre`.`id`, `genre`.`name`
+			FROM
+				movie, genre, moviegenre
+			WHERE 
+				`genre`.`id` = `moviegenre`.`idGenre` AND
+				`movie`.`id` = `moviegenre`.`idMovie` AND
+				`movie`.`id` = :idMovie
+		");
+		$stmt->execute(array(":idMovie" => $this->id));
+		$stmt->setFetchMode(PDO::FETCH_CLASS, "genre");
+		if (($object = $stmt->fetchAll()) !== false)
+			return $object;
+		else
+			throw new Exception("unable to fetch movie genres.");
 	}
 }

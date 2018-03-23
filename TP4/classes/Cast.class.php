@@ -1,5 +1,5 @@
 <?php
-require_once 'MyPDO.imac-movies.include.php'; // TO DO : à modifier
+require_once '../PDO/MyPDO.imac-movies.include.php'; 
 
 /**
  * Classe Cast

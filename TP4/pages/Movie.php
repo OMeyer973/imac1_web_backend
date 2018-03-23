@@ -3,18 +3,18 @@
 <html>
 <head>
 	<meta content="text/html; charset=utf-8" />
-	<link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" href="../style.css" />
 </head>
 
 <body>
 	<h1 class="title">Infos sur un film </h1>
 		<?php
 
-			require_once 'MyPDO.imac-movies.include.php';
-			require_once 'Movie.class.php';
-			require_once 'Movie.functions.php';
-			require_once 'Cast.class.php';
-			require_once 'Cast.functions.php';
+			require_once '../PDO/MyPDO.imac-movies.include.php';
+			require_once '../classes/Movie.class.php';
+			require_once '../functions/Movie.functions.php';
+			require_once '../classes/Cast.class.php';
+			require_once '../functions/Cast.functions.php';
 
 			$out = "";
 
