@@ -1,14 +1,32 @@
 
-body {
+body, input {
+	background-color: #212426;
+	color: #A7A7A7;
 	margin: 0px 5% 5% 5%;
+	font-family: sans-serif;
+}
+
+h1, h2, h3, h4 {
+	color: #DBDBDC;
+}
+
+a {
+	color: #6488D1;
+}
+
+a:visited {
+	color: #666666;
+}
+
+a:hover, a:visited:hover {
+	color: #AAAAAA;
 }
 
 .title {
 	text-align: center;
 }
 
-.search-parameters,
-.search-header {
+.search-parameters {
 	max-width: 350px;
 	margin: auto;
 }
@@ -35,6 +53,13 @@ ul {
 	text-align: right;
 }
 
+::-webkit-inner-spin-button {
+    display: none;
+}
+::-webkit-calendar-picker-indicator:hover {
+   background:none;
+}
+
 .submit {
 	display: block;
 	margin: 10px auto 10px auto;
@@ -52,6 +77,11 @@ ul.movie-list, ul.people-list {
 }
 
 .movie, .person {
-	width: 300px;
+	width: 250px;
 	margin: 10px 10px;
+}
+
+.movie h1, .movie h2, .movie h3, .movie h4, 
+.person h1, .person h2, .person h3, .person h4 {
+	text-align: center;
 }

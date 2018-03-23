@@ -13,27 +13,30 @@
 
 	function printSearchParameters ($inputs) {
 		// renvoie la liste des paramètres de recherche en tant que string
-		if (count($inputs) <= 0)
-			return "aucun paramètre entré, voici la liste complète";
+		
 		
 		$out = "<div class=\"search-parameters\">\n<ul>";
-		foreach ($inputs as $key => $value) {
-			$out .= "<li><div class=\"field-title\">";
-			$out .= $key . " : ";
-			$out .= "</div>\n";
-			$out .= "<div class=\"field\">";
-			if ($key == "genre") {
-				$i = 0;
-				foreach ($value as $genre) {
-					if ($i != 0)
-						$out .= ", ";	
-					$out .= $genre;
-					$i ++;
+		if (count($inputs) <= 0)
+			$out.= "aucun paramètre entré, voici la liste complète";
+		else {
+			foreach ($inputs as $key => $value) {
+				$out .= "<li><div class=\"field-title\">";
+				$out .= $key . " : ";
+				$out .= "</div>\n";
+				$out .= "<div class=\"field\">";
+				if ($key == "genre") {
+					$i = 0;
+					foreach ($value as $genre) {
+						if ($i != 0)
+							$out .= ", ";	
+						$out .= $genre;
+						$i ++;
+					}
+				} else {
+					$out .= $value;
 				}
-			} else {
-				$out .= $value;
+				$out .= "</div></li>";
 			}
-			$out .= "</div></li>";
 		}
 		$out .= "</ul></div>";
 		return $out;
@@ -56,7 +59,8 @@
 						return false;
 				break;
 				case "title" : 
-					if (strpos(strtoupper($movie->getTitle()), strtoupper($value)) === false)
+					if (strpos(strtoupper($movie->getTitle()), strtoupper($value)) === false &&
+						strpos(strtoupper($value), strtoupper($movie->getTitle())) === false)
 						return false;
 				break;
 				case "cast-member" :
