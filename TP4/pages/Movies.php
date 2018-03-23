@@ -17,7 +17,7 @@
 			require_once '../classes/Cast.class.php';
 			require_once '../functions/Cast.functions.php';
 			
-			$fields = ["title","genre","dateFrom", "dateTo","director"];
+			$fields = ["title","genre","dateFrom", "dateTo","cast-member"];
 			$selectedMovies = [];
 			$inputs = [];
 			$out = "";
@@ -25,10 +25,11 @@
 
 			//réception des champs
 			$inputs = getSearchFields($fields);
-
+			
 			//affichage des champs
 			$out .= "<div class=\"search-header\"><h2> paramètres de la recherche :</h2>";
 			$out .= printSearchParameters($inputs);
+			$out .= printBackToSearch();
 			$out .= "<h2> résultats de la recherche :</h2></div>";
 			
 			//on ajoute le film à la liste des films à afficher

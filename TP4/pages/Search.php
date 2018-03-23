@@ -8,7 +8,7 @@
 
 <body>
 	<h1 class="title"> recherche d'un film dans la liste</h1>
-	<form class="search-form" method="GET" action="Movies.php"> 
+	<form class="search-parameters" method="GET" action="Movies.php"> 
 		<ul>
 			<li>
 				<div class="field-title"> titre du film </div>
@@ -35,8 +35,8 @@
 				<div class="field"><input type="date" name="dateTo" value="" /></div>
 			</li>
 			<li>
-				<div class="field-title"> réalisateur </div>
-				<div class="field"><input type="string" name="director" value=""></div>
+				<div class="field-title"> membre du cast </div>
+				<div class="field"><input type="string" name="cast-member" value=""></div>
 			</li>
 			<input class="submit" value="chercher le film" type="submit">
 		</ul>

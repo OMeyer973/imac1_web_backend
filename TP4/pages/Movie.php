@@ -23,7 +23,8 @@
 
 				$movie = Movie::createFromId($id);
 				$out .= renderMovie($movie);
-
+				$out .= printBackToSearch();
+				
 				$out .= "<h2> Réalisateur(s) </h2>";
 				$directors = Cast::getDirectorsFromMovieId($movie->getId());
 				$out .= renderPeopleList($directors);

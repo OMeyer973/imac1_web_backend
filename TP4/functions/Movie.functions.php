@@ -1,4 +1,5 @@
 <?php
+	include_once '../classes/Cast.class.php';
  
 	function getSearchFields($fields) {
 		//récupération des champs du formulaire de recherche
@@ -15,11 +16,13 @@
 		if (count($inputs) <= 0)
 			return "aucun paramètre entré, voici la liste complète";
 		
-		$out = "";
+		$out = "<div class=\"search-parameters\">\n<ul>";
 		foreach ($inputs as $key => $value) {
-			
+			$out .= "<li><div class=\"field-title\">";
+			$out .= $key . " : ";
+			$out .= "</div>\n";
+			$out .= "<div class=\"field\">";
 			if ($key == "genre") {
-				$out .= "genre(s) : ";
 				$i = 0;
 				foreach ($value as $genre) {
 					if ($i != 0)
@@ -28,14 +31,20 @@
 					$i ++;
 				}
 			} else {
-				$out .= $key . " : ";
 				$out .= $value;
 			}
-			$out .= "<br>";
+			$out .= "</div></li>";
 		}
+		$out .= "</ul></div>";
 		return $out;
 	}
 
+	function printBackToSearch() {
+		$out = "<form class=\"search-parameters\" method=\"GET\" action=\"Search.php\">";
+		$out .= "<input class=\"submit\" value=\"retour à la recherche\" type=\"submit\">";
+		$out .= "</form>";
+		return $out;
+	}
 
 	function movieMatches($movie, $criterias) {
 		//est ce que le film correspond à la liste des critères ?
@@ -57,8 +66,8 @@
 					if (strpos(strtoupper($movie->getTitle()), strtoupper($value)) === false)
 						return false;
 				break;
-				case "director" :
-					if (!directedMovie($value, $movie))
+				case "cast-member" :
+					if (!(playedInMovie($value, $movie) || directedMovie($value, $movie)))
 						return false;
 				break;
 				default :
@@ -79,22 +88,40 @@
 	}
 
 	function directedMovie($director, $movie) {
-		include_once '../classes/Cast.class.php';
-		$director = strtoupper($director);
-		
 		$movieDirectors = Cast::getDirectorsFromMovieId($movie->getId());
+		return personMatchesList($director, $movieDirectors);
+	}
 
-		foreach ($movieDirectors as $movieDirector) {
-			$movieDirFN = strtoupper($movieDirector->getFirstname());
-			$movieDirLN = strtoupper($movieDirector->getLastname());
-			if (strpos($movieDirFN, $director) === false && //on regarde si le critère de recherche est dans le firstname ou le lastname
-				strpos($movieDirLN, $director) === false &&
-				strpos($director, $movieDirFN) === false && //on regarde si le firstname ou le lastname est dans le critère de recherche 
-				strpos($director, $movieDirLN) === false)
-				return false;
+	function playedInMovie($actor, $movie) {
+		$movieActors = Cast::getActorsFromMovieId($movie->getId());
+		
+		if (personMatchesList($actor, $movieActors)) {
+			return true;
 		}
-		return true;
-		//var_dump($movieDirectors);
+		return false;
+	}
+
+	function personMatchesList($person, $list) {
+		//renvoie vrai si on trouve une correspondance entre le nom $person et la liste de membres du cast $list
+		$person = strtoupper($person);
+		
+		//si la liste est vide on renvoie faux
+		if  (!isset($list) || empty( $list)) 
+			return false;
+
+		foreach ($list as $personListed) {
+			$personListedFNLN = strtoupper($personListed->getFirstname()) ." " .strtoupper($personListed->getLastname()); //concaténation firstname lastname
+			
+			$personListedLNFN = strtoupper($personListed->getLastname()) ." " .strtoupper($personListed->getFirstname()); // 
+			//concaténation lastnameFirstname
+			if (!(strpos($personListedFNLN, $person) === false && //le critère de recherche est dans le FNLN ?
+				strpos($personListedLNFN, $person) === false && //le critère de recherche est dans le LNFN ?
+				strpos($person, $personListedFNLN) === false && //le FNLN est dans le critère de recherche ?
+				strpos($person, $personListedLNFN) === false))  //le LNFN est dans le critère de recherche ?
+				return true;
+		}
+		return false;
+
 	}
 
 	function  renderMovieList($movies) {

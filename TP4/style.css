@@ -7,7 +7,7 @@ body {
 	text-align: center;
 }
 
-.search-form,
+.search-parameters,
 .search-header {
 	max-width: 350px;
 	margin: auto;
@@ -21,7 +21,7 @@ ul {
 	padding: 0px;
 }
 
-.search-form li {
+.search-parameters li {
 	display: flex;
 	flex-direction: row;}
 
