@@ -17,8 +17,9 @@
 			require_once '../functions/Movies.functions.php';
 			require_once '../classes/Cast.class.php';
 			require_once '../functions/Cast.functions.php';
-			
-			$fields = ["title","genre","dateFrom", "dateTo","cast-member"];
+			require_once '../classes/Country.class.php';
+
+			$fields = ["title","genre", "country", "dateFrom", "dateTo", "cast-member"];
 			$selectedMovies = [];
 			$inputs = [];
 			$out = "";

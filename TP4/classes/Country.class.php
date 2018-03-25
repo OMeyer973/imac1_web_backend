@@ -55,6 +55,30 @@ class Country {
 
 	/*******************GETTERS COMPLEXES*******************/
 
+		/**
+	 * Récupère le pays d'un film
+	 * @param  $idMovie identifiant du film
+	 * @return Country objet du pays
+	 */
+	public static function getCountryFromMovieId($idMovie) {
+		$stmt = MyPDO::getInstance()->prepare("
+			SELECT 
+				country.code,
+				country.name
+			FROM
+				country, movie
+			WHERE 
+				movie.id = :idMovie AND
+				country.code = movie.idCountry
+		");
+		$stmt->execute(array(":idMovie"=>$idMovie));
+		$stmt->setFetchMode(PDO::FETCH_CLASS, "country");
+		if (($object = $stmt->fetch()) !== false)
+			return $object;
+		else
+			throw new Exception("unable to fetch country from movie id");
+	}
+
 	/**
 	 * Récupère tous les enregistrements de la table Country de la bdd
 	 * qui ont au moins un film associé au country

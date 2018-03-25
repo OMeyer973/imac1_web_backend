@@ -13,7 +13,6 @@
 	function printSearchParameters ($inputs) {
 		// renvoie la liste des paramètres de recherche en tant que string
 		
-		
 		$out = "<div class=\"search-parameters\">\n<ul>";
 		if (count($inputs) <= 0)
 			$out.= "aucun paramètre entré, voici la liste complète";
@@ -57,6 +56,10 @@
 					if (!movieGenresMatchesInputGenres($movie->getGenres(), $value))
 						return false;
 				break;
+				case "country" :
+					if (!movieIsFromCountry($movie, $value))
+						return false;
+				break;
 				case "title" : 
 					if (strpos(strtoupper($movie->getTitle()), strtoupper($value)) === false &&
 						strpos(strtoupper($value), strtoupper($movie->getTitle())) === false)
@@ -84,6 +87,12 @@
 		return false;
 	}
 
+	function movieIsFromCountry($movie, $country) {
+		//est ce que le film $movie est du pays de nom $country ?
+		$movieCountry = Country::getCountryFromMovieId($movie->getId());
+		return $movieCountry->getName() == $country;
+	}
+
 	function directedMovie($director, $movie) {
 		//est ce que la personne ayant le nom $director a réalisé le film $movie ?
 		$movieDirectors = Cast::getDirectorsFromMovieId($movie->getId());
@@ -93,11 +102,7 @@
 	function playedInMovie($actor, $movie) {
 		//est ce que la personne ayant le nom $actor a joué dans le film $movie ?
 		$movieActors = Cast::getActorsFromMovieId($movie->getId());
-		
-		if (personMatchesList($actor, $movieActors)) {
-			return true;
-		}
-		return false;
+		return personMatchesList($actor, $movieActors);
 	}
 
 	function personMatchesList($person, $list) {
