@@ -25,7 +25,6 @@
 
 				$movie = Movie::createFromId($id);
 				$out .= renderMovie($movie);
-				$out .= renderBackToSearch();
 
 				$out .= "<h2> Réalisateur(s) </h2>";
 				$directors = Cast::getDirectorsFromMovieId($movie->getId());
@@ -35,8 +34,9 @@
 				$actors = Cast::getActorsFromMovieId($movie->getId());
 				$out .= renderPeopleList($actors);
 				
-				} else $out .= "id du film invalide";
+			} else $out .= "id du film invalide";
 
+			$out .= renderBackToSearch();
 			echo $out;
 
 		?>

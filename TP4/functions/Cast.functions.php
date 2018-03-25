@@ -1,5 +1,13 @@
 <?php
 
+	function renderGoToDirectors() {
+		//renvoie la chaine de caractères correspondant au bouton de retour à la page de recherche de film.
+		$out = "<form class=\"search-parameters\" method=\"GET\" action=\"Casts.php\">";
+		$out .= "<input class=\"submit\" value=\"voir tous les réalisateurs\" type=\"submit\">";
+		$out .= "</form>";
+		return $out;
+	}
+
 	function  renderPeopleList($people) {
 		//retourne une chaîne de caractère correspondant à l'affichage de la liste de gens
 

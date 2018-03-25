@@ -23,7 +23,6 @@
 
 				$person = Cast::createFromId($id);
 				$out .= renderPerson ($person);
-				$out .= renderBackToSearch();
 
 				$out .= "<h2> A réalisé </h2>";
 				$moviesDirected = Movie::getFromDirectorId($person->getId());
@@ -35,6 +34,7 @@
 				
 			} else $out .= "id de personne invalide";
 
+			$out .= renderBackToSearch();
 			echo $out;
 
 		?>

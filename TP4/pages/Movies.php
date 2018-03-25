@@ -31,7 +31,6 @@
 			//affichage des champs
 			$out .= "<div class=\"search-header\"><h2> paramètres de la recherche :</h2>";
 			$out .= printSearchParameters($inputs);
-			$out .= renderBackToSearch();
 			$out .= "<h2> résultats de la recherche :</h2></div>";
 			
 			//on ajoute le film à la liste des films à afficher
@@ -44,7 +43,9 @@
 			//on affiche la liste des films sélectionner
 			$out .= renderMovieList($selectedMovies);
 
-			//$out .= renderMovieList($movies);
+			$out .= renderBackToSearch();
+			$out .= "<h3 class=\"title\"> - ou - </h3>";
+			$out .= renderGoToDirectors();
 
 			echo $out;
 

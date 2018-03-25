@@ -53,8 +53,13 @@
 				<div class="field-title"> Un membre du cast </div>
 				<div class="field"><input type="string" name="cast-member" value=""></div>
 			</li>
-			<input class="submit" value="chercher le film" type="submit">
+			<input class="submit" value="chercher un film" type="submit">
 		</ul>
 	</form>
+	<h3 class="title"> - ou - </h3> 
+	<?php
+		require_once '../functions/Cast.functions.php';
+		echo renderGoToDirectors();
+	?>
 
 </body>

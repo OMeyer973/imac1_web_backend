@@ -29,6 +29,7 @@
 			$out .="</option><br>";
 		}
 		$out .= "</select>";
+
 		return $out;
 	}
 

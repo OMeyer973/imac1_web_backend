@@ -21,7 +21,7 @@
 
 			$allCast = Cast::getAll();
 			$out .= renderPeopleList($allCast);
-
+			$out .= renderBackToSearch();
 			echo $out;
 
 		?>
